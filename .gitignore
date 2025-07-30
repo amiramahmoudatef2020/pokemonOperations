@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env*
+*.log
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.psd
+*.tiff
+.DS_Store
