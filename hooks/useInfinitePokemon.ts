@@ -6,10 +6,13 @@ export function useInfinitePokemon() {
   return useInfiniteQuery({
     queryKey: ['pokemon-infinite'],
     queryFn: async ({ pageParam }: { pageParam?: string }) => {
-      const url = pageParam
+      const apiUrl = pageParam
         ? pageParam
-        : `https://cors-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=0`;
-      const res = await fetch(url);
+        : `https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=0`;
+
+      const proxyUrl = `/api/proxy?url=${encodeURIComponent(apiUrl)}`;
+
+      const res = await fetch(proxyUrl);
       if (!res.ok) throw new Error('Failed to fetch');
       return res.json();
     },
