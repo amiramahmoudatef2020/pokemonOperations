@@ -54,8 +54,8 @@ export default function PaginationPage() {
       {data && (
         <>
           <PokemonGrid>
-            {data.results.map((pokemon: any) => {
-              const id = pokemon.url.split('/').filter(Boolean).pop();
+            {data.results.map((pokemon) => {
+              const id = pokemon.url.split('/').filter(Boolean).pop() || '';
               return (
                 <PokemonCard key={pokemon.name} id={id} name={pokemon.name} />
               );

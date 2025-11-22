@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import type { PokemonListResponse } from './usePaginatedPokemon';
 
 const LIMIT = 40;
 
 export function useInfinitePokemon() {
-  return useInfiniteQuery({
+  return useInfiniteQuery<PokemonListResponse>({
     queryKey: ['pokemon-infinite'],
     queryFn: async ({ pageParam }: { pageParam?: string }) => {
       const apiUrl = pageParam

@@ -35,9 +35,9 @@ export default function LoadMorePage() {
       {data && (
         <>
           <PokemonGrid>
-            {data.pages.flatMap((page: any) =>
-              page.results.map((pokemon: any) => {
-                const id = pokemon.url.split('/').filter(Boolean).pop();
+            {data.pages.flatMap((page) =>
+              page.results.map((pokemon) => {
+                const id = pokemon.url.split('/').filter(Boolean).pop() ?? '';
                 return (
                   <PokemonCard key={pokemon.name} id={id} name={pokemon.name} />
                 );

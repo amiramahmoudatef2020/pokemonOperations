@@ -1,5 +1,3 @@
-// code/app/api/proxy/route.ts
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const targetUrl = searchParams.get('url');
@@ -19,7 +17,7 @@ export async function GET(req: Request) {
         'Content-Type': contentType,
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return new Response('Failed to fetch target URL', { status: 500 });
   }
 }

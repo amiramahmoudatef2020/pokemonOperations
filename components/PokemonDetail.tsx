@@ -2,8 +2,47 @@
 
 import Image from 'next/image';
 
+interface PokemonTypeEntry {
+  type: {
+    name: string;
+  };
+}
+
+interface PokemonStatEntry {
+  stat: {
+    name: string;
+  };
+  base_stat: number;
+}
+
+interface PokemonAbilityEntry {
+  ability: {
+    name: string;
+  };
+  is_hidden: boolean;
+}
+
+interface PokemonSprites {
+  other?: {
+    ['official-artwork']?: {
+      front_default: string | null;
+    };
+  };
+}
+
+interface PokemonDetailData {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  base_experience: number;
+  sprites: PokemonSprites;
+  types: PokemonTypeEntry[];
+  stats: PokemonStatEntry[];
+  abilities: PokemonAbilityEntry[];
+}
 interface PokemonDetailProps {
-  data: any;
+  data: PokemonDetailData;
 }
 
 export const PokemonDetail = ({ data }: PokemonDetailProps) => {
@@ -27,7 +66,6 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
 
   return (
     <div className="max-w-4xl mx-auto rounded-2xl shadow-xl overflow-hidden bg-white dark:bg-gray-900">
-      {/* Header */}
       <div className="bg-gradient-to-r from-pink-400 to-purple-500 text-white px-6 py-6 text-center">
         <h1 className="text-3xl font-bold capitalize">
           {name}{' '}
@@ -37,7 +75,6 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
         </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-8 items-center">
-        {/* Left Column - Image & Physical Stats */}
         <div className="flex flex-col items-center">
           <div className="w-40 h-40 rounded-full border-4 border-white shadow-lg bg-white overflow-hidden mb-4">
             <Image
@@ -51,10 +88,8 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
               className="object-contain"
             />
           </div>
-
-          {/* Types */}
           <div className="flex flex-wrap gap-2 mb-4">
-            {types.map(({ type }: any) => (
+            {types.map(({ type }) => (
               <span
                 key={type.name}
                 className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm"
@@ -63,8 +98,6 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
               </span>
             ))}
           </div>
-
-          {/* Height & Weight */}
           <div className="flex justify-center gap-12 text-center">
             <div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -80,13 +113,10 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
             </div>
           </div>
         </div>
-
-        {/* Right Column - Stats & Abilities */}
         <div className="space-y-6 mt-2">
-          {/* Base Stats */}
           <div>
             <h2 className="text-xl font-bold mb-3">Base Stats</h2>
-            {stats.map(({ stat, base_stat }: any) => (
+            {stats.map(({ stat, base_stat }) => (
               <div key={stat.name} className="mb-3">
                 <div className="flex justify-between text-sm font-medium">
                   <span>{formatStatName(stat.name)}</span>
@@ -101,14 +131,12 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
               </div>
             ))}
           </div>
-
-          {/* Abilities */}
           <div>
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
               Abilities
             </div>
             <div className="flex flex-wrap gap-2">
-              {abilities.map(({ ability, is_hidden }: any) => (
+              {abilities.map(({ ability, is_hidden }) => (
                 <span
                   key={ability.name}
                   className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"
@@ -121,8 +149,6 @@ export const PokemonDetail = ({ data }: PokemonDetailProps) => {
               ))}
             </div>
           </div>
-
-          {/* Base Experience */}
           <div>
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
               Base Experience

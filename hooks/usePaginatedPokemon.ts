@@ -1,4 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
+export interface PokemonListItem {
+  name: string;
+  url: string;
+}
+
+export interface PokemonListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonListItem[];
+}
 
 export const LIMIT = 20;
 
@@ -7,7 +18,7 @@ export function usePaginatedPokemon(page: number) {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=${offset}`;
   const proxyUrl = `/api/proxy?url=${encodeURIComponent(apiUrl)}`;
 
-  return useQuery({
+  return useQuery<PokemonListResponse>({
     queryKey: ['pokemon', page],
     queryFn: async () => {
       const res = await fetch(proxyUrl);

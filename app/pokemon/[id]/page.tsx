@@ -12,11 +12,11 @@ export default async function PokemonPage({ params }: PokemonPageProps) {
 
   try {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-      next: { revalidate: 3600 }, // revalidate every hour
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
-      notFound(); // show 404 page if invalid Pokémon
+      notFound();
     }
 
     const data = await res.json();
