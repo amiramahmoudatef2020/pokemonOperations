@@ -5,7 +5,7 @@ start with npm install then npm run dev
 
 ## Scope & Time Investment
 
-I spent around **16 hours end-to-end** building and refining this project, including:
+I spent around **12 hours end-to-end** building and refining this project, including:
 
 - Setting up a **Next.js + TypeScript + React Query + Tailwind** base.
 - Implementing **two Pokémon list views** (pagination + infinite "Load More") with proper caching, error handling, and skeleton loading.
